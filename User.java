@@ -1,3 +1,5 @@
+// This Class have personal details of individual users
+
 package com.example.courseapi.model;
 
 
