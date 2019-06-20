@@ -1,0 +1,59 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:data-demo
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    show-sql: true
+    hibernate:
+      dialect: org.hibernate.dialect.H2Dialect
+      ddl-auto: 'create-drop'
+
+
+
+      use-new-id-generator-mappings: false
+    naming:
+       physical-strategy: "org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl"
+    properties:
+        hibernate:
+        dialect: "org.hibernate.dialect.H2Dialect"
+        use-new-id-generator-mappings: false
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
