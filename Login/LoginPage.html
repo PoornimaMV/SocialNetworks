@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>transparent login form</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        body:before{
+            content: '';
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background-image: url("C:/Users/pm18/Desktop/FrontEnd/SocialNetwork/Login/LoginPic.jpg");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            -webkit-filter: blur(0px);
+            -moz-filter: blur(0px);
+            -o-filter: blur(0px);
+            -ms-filter: blur(0px);
+            filter: blur(2px);
+        }
+        .contact-form
+        {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 400px;
+            height: 500px;
+            border-radius: 15PX;
+            padding: 80px 40px;
+            box-sizing: border-box;
+            background: rgba(0,0,0,.5);
+        }
+        .avatar {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            top: calc(-80px/2);
+            left: calc(50% - 40px);
+        }
+        .contact-form h2 {
+            margin: 0;
+            padding: 0 0 20px;
+            color: #fff;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .contact-form p
+        {
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            color: #fff;
+        }
+        .contact-form input
+        {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .contact-form input[type="text"],
+        .contact-form input[type="password"]
+        {
+            border: none;
+            border-bottom: 1px solid #fff;
+            background: transparent;
+            outline: none;
+            height: 40px;
+            color: #fff;
+            font-size: 16px;
+        }
+        .contact-form input[type="submit"] {
+            height: 40px;
+            color: rgb(253, 252, 252);
+            font-size: 25px;
+            width: 200px;
+            box-align: center;
+            background: rgb(158, 156, 156);
+            cursor: pointer;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            margin-top: 15%;
+        }
+        .contact-form button {
+            border: none;
+            outline: 0;
+            border-radius: 20px;
+            widows: 250px;
+            display: inline-block;
+            padding: 10px 25px;
+            color: black;
+            background-color: #ddd;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .contact-form a
+        {
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        input[type="checkbox"] {
+            width: 20%;
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-form">
+        <img src="C:\Users\pm18\Desktop\FrontEnd\SocialNetwork\Login\avatar.png" class="avatar">
+        <h2>LogIn </h2>
+        <form>
+            <p>Email</p>
+            <input type="text" name="" id="email" placeholder="Enter Email">
+            <p>Password</p>
+            <input type="password" name="" id="password" placeholder="Enter Password">
+            <button type="button" onclick="handleClick()" onclick="">Login</button>
+            <button  type="reset" onclick="location.href='C:/Users/pm18/Desktop/FrontEnd/SocialNetwork/Welcome/WelcomePage.html'" >Cancel</button>
+        </form>
+    </div>
+
+    
+
+<script type="text/javascript">
+        function postData(url = '', data = {}) {
+            console.log('We are here');
+            // Default options are marked with *
+            return fetch(url, {
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                
+                headers: {
+                    'Content-Type': 'application/json',
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+               
+                body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+                .then(response => response.json()); // parses JSON response into native Javascript objects 
+        }
+
+        function handleClick() {
+            console.log('Hi');
+            const email = document.getElementById('email').value;
+           
+            const password = document.getElementById('password').value;
+            
+            const Data = {
+                url: 'http://localhost:8080/api/users/login',
+                data: { 
+                 
+                    'mailId': email, 
+                    'password': password
+                }
+            };
+            postData(Data.url, Data.data)
+                .then(data =>{ 
+                    if((JSON.stringify(data))=="true")
+                {
+                    window.location="C:/Users/pm18/Desktop/FrontEnd/SocialNetwork/LandingPage/Landing.html" ;
+                }
+                else{
+                        alert("Invalid Credentials")
+                }
+                })
+                .catch(error => console.error(error));
+        }
+    </script>
+
+
+<script>
+    /*    var attempt = 3; // Variable to count number of attempts.
+// Below function Executes on click of login button.
+function validate(){
+    console.log('hello');
+var email = document.getElementById("email").value;
+var password = document.getElementById("password").value;
+
+if ( email == "poornima" && password == "poornima"){
+alert ("Login successfully");
+window.location = "C:/Users/pm18/Desktop/FrontEnd/SocialNetwork/LandingPage/Landing.html"; // Redirecting to other page.
+return false;
+}
+
+else{
+attempt --;// Decrementing by one.
+alert("You have left "+attempt+" attempt;");
+// Disabling fields after 3 attempts.
+if( attempt == 0){
+document.getElementById("email").disabled = true;
+document.getElementById("password").disabled = true;
+document.getElementById("submit").disabled = true;
+return false;
+}
+}
+}
+function handleClick() {
+            console.log('hello');
+
+            const email = document.getElementById('email').value;
+           
+            const password = document.getElementById('password').value;
+
+            const url = 'http://localhost:8080/api/users';
+
+            const data = {
+                    'mailId': email,
+                    
+                    'password': password
+                };
+
+
+            postData(Data.url,Data.data)
+                    .then(data=>{
+                        if (JSON.stringify(data))
+                        window.location="C:/Users/pm18/Desktop/FrontEnd/SocialNetwork/LandingPage.html"
+                        })
+
+
+
+            console.log('' + JSON.stringify(data));
+            fetch(url, {
+                method: 'POST',               
+                headers: {
+                    'Content-Type': 'application/json',                    
+                },            
+                body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+            .then(response => response.json())
+                .then(data => console.log(JSON.stringify(data)))
+                .catch(error => console.error(error));
+        }
+ */   
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>sign in form</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body:before {
+            content: '';
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background-image: url("C:/Users/pm18/Desktop/FrontEnd/SocialNetwork/SignUp/Pic.jpg");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            -webkit-filter: blur(0px);
+            -moz-filter: blur(0px);
+            -o-filter: blur(0px);
+            -ms-filter: blur(0px);
+            filter: blur(01px);
+        }
+
+        .contact-form {
+            position: absolute;
+            top: 85%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 800px;
+
+            border-radius: 25px;
+            padding: 80px 40px;
+            box-sizing: border-box;
+            background: rgba(0, 0, 0, .5);
+        }
+
+        .avatar {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            top: calc(-80px/2);
+            left: calc(50% - 40px);
+        }
+
+        .contact-form h2 {
+            margin: 0;
+            padding: 0 0 20px;
+            color: #fff;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .button {
+            border: none;
+            outline: 0;
+            border-radius: 20px;
+            widows: 250px;
+            display: inline-block;
+            padding: 10px 25px;
+            color: black;
+            background-color: #ddd;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .contact-form p {
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .contact-form input {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="password"] {
+            border: none;
+            border-bottom: 1px solid #fff;
+            background: transparent;
+            outline: none;
+            height: 40px;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .contact-form input[type="submit"] {
+            height: 40px;
+            color: rgb(253, 252, 252);
+            font-size: 25px;
+            width: 200px;
+            box-align: center;
+            background: rgb(158, 156, 156);
+            cursor: pointer;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            margin-top: 15%;
+        }
+
+        .contact-form button {
+            border: none;
+            outline: 0;
+            border-radius: 20px;
+            widows: 250px;
+            display: inline-block;
+            padding: 10px 25px;
+            color: black;
+            background-color: #ddd;
+            text-align: center;
+            cursor: pointer;
+        }
+
+
+        .contact-form a {
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .required:before{ content:"*"; }
+
+        input[type="checkbox"] {
+            width: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contact-form">
+        <img src="C:\Users\pm18\Desktop\FrontEnd\SocialNetwork\SignUp\avatar.png" class="avatar">
+        <h2>Sign Up</h2>
+        <form>
+          
+            <p>Name</p>
+            <input type="text" name="" id="Name" class="required" placeholder="Enter Name" >
+            <p>Email</p>
+            <input type="text" name="" id="Email" class="required"  placeholder="Enter Email" >
+            <p>Phone Number</p>
+            <input type="text" name="" id="PhoneNumber" class="required"  placeholder="Enter Phone Number" >
+            <p>Date of Birth</p>
+            <input type="datetime" name="" id="DOB" class="required"  placeholder="yyyy-mm-dd" >
+            <p>Gender</p>
+            <input type="text" name="" id="Gender" class="required"  placeholder="Enter Gender" >
+            <p>Password</p>
+            <input type="password" name="" id="Password" class="required"  placeholder="Enter Password" >
+
+            <centre>
+                <button type="button" onclick="handleClick()"  onclick="location.href='C:/Users/pm18/Desktop/FrontEnd/SocialNetwork/Welcome/LandingPage.html'"> Sign up</button>
+                <button  type="reset" onclick="location.href='C:/Users/pm18/Desktop/FrontEnd/SocialNetwork/Welcome/WelcomePage.html'" >Cancel</button>
+            </centre>
+     
+        </form>
+    </div>
+    <script type="text/javascript">
+        
+        function handleClick() {
+            console.log('hello');
+
+            const name = document.getElementById('Name').value;
+            const email = document.getElementById('Email').value;
+            const phone = document.getElementById('PhoneNumber').value;
+            const dob = document.getElementById('DOB').value;
+            const gender = document.getElementById('Gender').value;
+            const password = document.getElementById('Password').value;
+
+            const url = 'http://localhost:8080/api/users';
+
+            const data = {
+                    'userName': name,
+                    'mailId': email,
+                    'phoneNo': phone,
+                    'dob': dob,
+                    'gender': gender,
+                    'password': password
+                };
+
+            console.log('' + JSON.stringify(data));
+            fetch(url, {
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.                
+                headers: {
+                    'Content-Type': 'application/json',                    
+                },            
+                body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+            .then(response => response.json())
+                .then(data => console.log(JSON.stringify(data)) )
+                .catch(error => console.error(error));
+        }
+    </script>
+
+</body>
+
+</html>
